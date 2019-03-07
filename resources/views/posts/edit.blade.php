@@ -12,7 +12,7 @@
 
 
 			{{ Form::label('title', 'Title:') }}
-			{{ Form::text('title', null, ['class' => 'form-control input-lg my-5']) }}
+			{{ Form::text('title', null, ['class' => 'form-control input-lg']) }}
 
 			{{ Form::label('body', "Body:", ['class' => 'top-margin']) }} {{-- 'top-margin' class is from style.css--}}
 			{{ Form::textarea('body', null,  ['class' => 'form-control']) }}
