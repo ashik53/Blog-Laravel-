@@ -55,6 +55,12 @@
 				</tbody>
 			</table> 
 
+			<div class= "text-center">
+			
+				{!! $posts->render() !!}	
+
+			</div>
+
 		</div> <!-- col-->
 	</div> <!-- col -->
 @stop

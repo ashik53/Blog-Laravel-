@@ -15,7 +15,7 @@ class PostController extends Controller
     public function index()
     {
         
-        $posts = Post::all();
+        $posts = Post::latest()->paginate(3);
 
         return view('posts.index')->withPosts($posts);
 
@@ -45,8 +45,8 @@ class PostController extends Controller
 
         $this->validate($request, array( /* this keyword is a must use validate() function */
 
-            'title' => 'required|max:100|min:3',
-            'body'  => 'required|min:3|max:500'
+            'title' => 'required|max:500|min:3',
+            'body'  => 'required|min:3|max:10000'
         ));
 
 

@@ -25,11 +25,11 @@
 			{{-- all form componenets will be available blow --}}
 
 				{{ Form::label('title', 'Title:') }} {{-- label tag, you can add as much as you need, 1st parameter title name, 2nd is the label value --}}
-				{{ Form::text('title', null, array('class' => 'form-control', 'required' => '', 'minlength' => 3, 'maxlength' => 100)) }} {{-- 2nd parameter is the default value(here null is used), array will be used from third parameters; required, maxlength is a parsley component--}}
+				{{ Form::text('title', null, array('class' => 'form-control', 'required' => '', 'minlength' => 3, 'maxlength' => 300)) }} {{-- 2nd parameter is the default value(here null is used), array will be used from third parameters; required, maxlength is a parsley component--}}
 
 				{{-- text area --}}
 				{{ Form::label('body', 'Post Body:', array('style' => 'margin-top: 20px')) }}
-				{{ Form::textarea('body', '', array('class' => 'form-control', 'required' => '', 'minlength' => 10, 'maxlength' => 500)) }}
+				{{ Form::textarea('body', '', array('class' => 'form-control', 'required' => '', 'minlength' => 10, 'maxlength' => 10000)) }}
 				
 
 				{{-- submit button --}}

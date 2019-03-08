@@ -60,6 +60,15 @@
 					</div> <!-- col -->
 				</div> <!-- row-->
 
+				<!-- New button on the sidebar named "See all posts" -->
+
+				<div class = "row">
+					<div class= "col-md-12">
+						{{ Html::linkRoute('posts.index', '<< See All Posts', [], ['class' => 'btn btn-default btn-block top-margin']) }} {{-- [] denotes if you need to send variable then you can use the array--}}
+					</div> <!-- col-->
+				</div> <!-- row-->
+
+
 				<!--Edit and Delete Button -->
 
 				{{--I will use the remaining 4 amount of spaces which is 12, one button will use 6 , another will use 6  --}}
