@@ -46,7 +46,8 @@ class PostController extends Controller
         $this->validate($request, array( /* this keyword is a must use validate() function */
 
             'title' => 'required|max:500|min:3',
-            'body'  => 'required|min:3|max:10000'
+            'body'  => 'required|min:3|max:10000',
+            'slug'  => 'required|min:5|max:255|unique:posts,slug'
         ));
 
 
@@ -54,6 +55,7 @@ class PostController extends Controller
 
         $post->title = $request->title; // inset the title from form into title of post object , same as body
         $post->body = $request->body;
+        $post->slug = $request->slug;
 
         $post->save(); // save the post into database with save() function
 
@@ -108,16 +110,31 @@ class PostController extends Controller
     {
         //validate the data from request
 
-        $this->validate($request, array(
+        $post =  Post::find($id);
 
+        if($post->slug == $request->input('slug')){
+            
+            $this->validate($request, array(
                 'title' => 'required|max:255',
                 'body'  => 'required'
-        ));
+            ));
+        } else {
+            
+            $this->validate($request, array(
+
+                'title' => 'required|max:255',
+                'slug'  => 'required|min:5|max:255|unique:posts,slug',
+                'body'  => 'required'
+            ));
+
+        } //else
+        
 
         //Save the data to the database
         $post = Post::find($id);
         
         $post->title = $request->input('title');
+        $post->slug  = $request->input('slug');
         $post->body  = $request->input('body');
        
         $post->save();

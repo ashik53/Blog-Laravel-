@@ -20,7 +20,11 @@
 
 Route::group(['middleware' => ['web']],  function (){
 
+	Auth::routes();
+
+	Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getSingle']);
 	Route::get('contact', 'PagesController@getContact');
+	Route::get('blog', array('uses' => 'BlogController@getIndex', 'as' => 'blog.index'));
 	Route::get('about', 'PagesController@getAbout');
 	Route::get('/', 'PagesController@getIndex');
 
@@ -31,3 +35,9 @@ Route::group(['middleware' => ['web']],  function (){
 
 
 
+
+
+
+
+
+Route::get('/home', 'HomeController@index')->name('home');

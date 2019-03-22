@@ -14,6 +14,9 @@
 			{{ Form::label('title', 'Title:') }}
 			{{ Form::text('title', null, ['class' => 'form-control input-lg']) }}
 
+			{{ Form::label('slug', 'Slug:', ['class' => 'top-margin'] ) }}
+			{{ Form::text('slug', null, ['class' => 'form-control']) }}
+
 			{{ Form::label('body', "Body:", ['class' => 'top-margin']) }} {{-- 'top-margin' class is from style.css--}}
 			{{ Form::textarea('body', null,  ['class' => 'form-control']) }}
 

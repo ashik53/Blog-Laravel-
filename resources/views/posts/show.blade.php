@@ -20,18 +20,21 @@
 			<div class="well">
 				<dl class= "dl-horizontal">
 
-					<dt> Create At: </dt>
+				    <label> Url: </label>
+				    <p> <a href="{{ route('blog.single', $post->slug) }}"> {{ route('blog.single', $post->slug) }} </a></p>
+
+					<label> Created At: </label>
 
 					<!-- working with php date function, I will represent the date -->
 
-					<dd> {{ date('M j, Y h:ia', strtotime($post->created_at)) }} </dd>
+					<p> {{ date('M j, Y h:ia', strtotime($post->created_at)) }} </p>
 
 				</dl>
 
 				<dl class= "dl-horizontal">
 
-					<dt> Last updated At: </dt>
-					<dd> {{ $post->created_at->diffForHumans() }}</dd>
+					<label> Last updated At: </label>
+					<p> {{ date('M j, Y h:ia', strtotime($post->updated_at)) }}</p>
 
 				</dl>
 				<hr>

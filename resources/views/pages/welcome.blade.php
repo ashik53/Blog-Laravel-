@@ -37,7 +37,10 @@
                 <div class="post">
                     <h3> {{ $post->title}}</h3>
                     <p>  {{ substr($post->body, 0, 300) }} {{ strlen($post->body) > 300 ? "..." : "" }} </p>
-                    <a href="#" class="btn btn-primary"> Read More</a>
+                    <a href="{{ url('blog/'.$post->slug) }}" class="btn btn-primary"> Read More</a>
+
+                    <!--we have show the blog url, so instead of 'posts.show' route ,we use url -->
+                    
                 </div> <!-- post-->
 
                 <hr>
