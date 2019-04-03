@@ -2,6 +2,13 @@
 
 @section('title', '| Edit Blog post')
 
+
+@section('stylesheets') {{-- It doesnot extend aywhere , it's a raw section--}}
+
+	{!! Html::style('css/select2.min.css') !!}
+
+@endsection
+
 @section('content')
 
 	<div class= "row">
@@ -16,6 +23,22 @@
 
 			{{ Form::label('slug', 'Slug:', ['class' => 'top-margin'] ) }}
 			{{ Form::text('slug', null, ['class' => 'form-control']) }}
+
+			{{ Form::label('category_id', 'Category') }}
+				<select class="form-control" name="category_id">
+					
+						@foreach ($categories as $category)
+
+							@if ($post->category_id == $category->id) 
+								<option value= "{{ $category->id }} " selected> {{ $category->name }}</option>
+						    @else
+						    	<option value= "{{ $category->id }} " > {{ $category->name }}</option>
+						    @endif
+
+						@endforeach
+				
+				</select>
+
 
 			{{ Form::label('body', "Body:", ['class' => 'top-margin']) }} {{-- 'top-margin' class is from style.css--}}
 			{{ Form::textarea('body', null,  ['class' => 'form-control']) }}
@@ -74,4 +97,8 @@
 
 @endsection
 
+@section('scripts') {{-- html helper of laravel 4--}}
 
+	{!! Html::script('js/select2.min.js') !!}
+
+@endsection

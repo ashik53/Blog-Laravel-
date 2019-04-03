@@ -6,6 +6,7 @@
 @section('stylesheets') {{-- It doesnot extend aywhere , it's a raw section--}}
 
 	{!! Html:: style('css/parsley.css') !!}
+	{!! Html::style('css/select2.min.css') !!}
 
 @endsection
 
@@ -32,6 +33,33 @@
 				{{ Form::text('slug', null, array('class' => 'form-control', 'required' => '', 'minlength' => 5, 'maxLength' => 255 )) }}
 
 
+				{{-- add a post category --}}
+				{{ Form::label('category_id', 'Category') }}
+				<select class="form-control" name="category_id">
+					
+					@foreach ($categories as $category)
+						<option value= "{{ $category->id }} "> {{ $category->name }}</option>
+					@endforeach
+					
+				</select>
+
+				{{--@foreach ($categories as $category)
+					<li > {{ $category->name }}</li>
+				@endforeach
+
+				<br> --}}
+
+				{{-- tag adding section --}}
+				
+				{{ Form::label('tags', 'Tags:') }}
+				<select class="form-control select2-multi" name="tags[]" multiple="multiple">
+					@foreach($tags as $tag)
+						<option value="{{ $tag->id }}"> {{ $tag->name }}</option>
+					@endforeach
+
+				</select>
+
+
 				{{-- text area --}}
 				{{ Form::label('body', 'Post Body:', array('style' => 'margin-top: 20px')) }}
 				{{ Form::textarea('body', '', array('class' => 'form-control', 'required' => '', 'minlength' => 10, 'maxlength' => 10000)) }}
@@ -40,7 +68,7 @@
 				{{-- submit button --}}
 				{{ Form::submit('Create New Post', array('type' => 'btn', 'class' => 'btn btn-success btn-lg btn-block', 'style' => 'margin-top: 20px')) }}
 
-			{!! Form::close() !!} <!---- close the form -->
+			{!! Form::close() !!} <!-- close the form -->
 
 		</div> <!-- col-->
 
@@ -51,6 +79,13 @@
 
 @section('scripts') {{-- html helper of laravel 4--}}
 
-	{!! Html::script('js/parsley.min.js') !!}
+	
 
+	{!! Html::script('js/parsley.min.js') !!}
+	{!! Html::script('js/select2.min.js') !!}
+
+	<script type="text/javascript">
+		$('.select2-multi').select2();
+	</script>
+	
 @endsection

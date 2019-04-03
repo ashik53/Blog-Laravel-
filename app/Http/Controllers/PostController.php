@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Tag;
+use App\Category;
 use Session;
 class PostController extends Controller
 {
@@ -28,8 +30,10 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
-        return view('posts.create');
+        //fetch all the categories
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('posts.create')->withCategories($categories)->withTags($tags);
 
     } //create
 
@@ -42,12 +46,13 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
-
+        //dd($request)
         $this->validate($request, array( /* this keyword is a must use validate() function */
 
             'title' => 'required|max:500|min:3',
             'body'  => 'required|min:3|max:10000',
-            'slug'  => 'required|min:5|max:255|unique:posts,slug'
+            'slug'  => 'required|min:5|max:255|unique:posts,slug',
+            'category_id' => 'required|integer',
         ));
 
 
@@ -56,9 +61,10 @@ class PostController extends Controller
         $post->title = $request->title; // inset the title from form into title of post object , same as body
         $post->body = $request->body;
         $post->slug = $request->slug;
+        $post->category_id = $request->category_id;
 
         $post->save(); // save the post into database with save() function
-
+        $post->tags()->sync($request->tags, false);
         //adding a flash session
         Session::flash('success', 'The blog post was successfully saved');
 
@@ -94,8 +100,14 @@ class PostController extends Controller
     {
         //
         $post = Post::find($id);
+        $categories = Category::all();
+        /*$cats = array();
 
-        return view('posts.edit')->withPost($post);
+        foreach($categories as $category){
+            $cats[$category->id] = $category->name;
+        } */
+
+        return view('posts.edit')->withPost($post)->withCategories($categories);
 
     } //edit
 
@@ -116,7 +128,8 @@ class PostController extends Controller
             
             $this->validate($request, array(
                 'title' => 'required|max:255',
-                'body'  => 'required'
+                'body'  => 'required',
+                'category_id' => 'required|integer'
             ));
         } else {
             
@@ -124,7 +137,9 @@ class PostController extends Controller
 
                 'title' => 'required|max:255',
                 'slug'  => 'required|min:5|max:255|unique:posts,slug',
-                'body'  => 'required'
+                'body'  => 'required',
+                'category_id' => 'required|integer'
+
             ));
 
         } //else
@@ -135,6 +150,7 @@ class PostController extends Controller
         
         $post->title = $request->input('title');
         $post->slug  = $request->input('slug');
+        $post->category_id = $request->input('category_id');
         $post->body  = $request->input('body');
        
         $post->save();

@@ -12,4 +12,4 @@
 
     @yield('stylesheets')
 
-</style>
+

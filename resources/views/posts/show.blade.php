@@ -12,6 +12,13 @@
 
 			<p class="lead"> {{ $post->body }}</p>
 
+			<hr>
+			<div class="tags">  
+				@foreach ($post->tags as $tag)
+					<span class="label label-default"> {{ $tag->name }}</span>
+				@endforeach
+			</div> <!-- tags -->
+
 			<p> {{ $post->created_at->diffForHumans() }}</p>
 
 		</div> <!-- col -->
@@ -22,6 +29,9 @@
 
 				    <label> Url: </label>
 				    <p> <a href="{{ route('blog.single', $post->slug) }}"> {{ route('blog.single', $post->slug) }} </a></p>
+
+				    <label> Category: </label>
+				    <p> {{ $post->category->name }} </p>
 
 					<label> Created At: </label>
 

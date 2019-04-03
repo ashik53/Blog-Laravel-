@@ -31,6 +31,11 @@ Route::group(['middleware' => ['web']],  function (){
 	//This is a resource router includes all resource methods in the controller
 	Route::resource('posts', 'PostController');
 
+	//CategoryContoller routes
+	Route::resource('categories', 'CategoryController', ['except' => ['create'] ]);
+
+	// Resource route for TagsController
+	Route::resource('tags', 'TagController');
 });
 
 
